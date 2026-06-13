@@ -1,6 +1,45 @@
+@model IEnumerable<Medicamento>
+
 @{
     ViewData["Title"] = "Lista de Medicamentos";
 }
 
 <h1>Lista de Medicamentos</h1>
-<p>Bienvenida a tu sistema de farmacia. ¡La configuración inicial ha sido exitosa!</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Stock</th>
+            <th>Vencimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.EstaProximoAVencer ? "table-danger" : "")">
+                <td>@item.Nombre</td>
+                <td>
+                    @item.Stock
+
+                    @if (item.TieneStockCritico)
+                    {
+                        <span class="badge bg-warning text-dark">
+                            ¡Stock Crítico!
+                        </span>
+                    }
+                </td>
+                <td>
+                    @item.FechaVencimiento.ToShortDateString()
+
+                    @if (item.EstaProximoAVencer)
+                    {
+                        <span class="badge bg-danger">
+                            ¡Vence pronto!
+                        </span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
