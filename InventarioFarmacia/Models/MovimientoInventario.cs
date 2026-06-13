@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace InventarioFarmacia.Models
+﻿namespace InventarioFarmacia.Models
 {
-    internal class MovimientoInventario
+    public class MovimientoInventario
     {
         public int Id { get; set; }
-        public string TipoMovimiento { get; set; }
+        public int MedicamentoId { get; set; }
         public int Cantidad { get; set; }
+        public DateTime FechaMovimiento { get; set; }
     }
 }
